@@ -25,6 +25,10 @@ A stateless widget has no state, which means that that widget will not change as
 
   A widget defined by me that has an associated ShopItem, which defines an associated string Icon and color(for the bonus) for the shopCard widgets
 
+* **Widget**
+
+  The building blocks of creating an application with Flutter. Determines every element on the application that the user can see and interact with. This is done by correctly sequencing widgets, using the subclasses of widgets and assigning values to attributes of the widget object(s)
+
 * **Material**
 
   The base widget required to use the material design system defined by Google, which allows use of features that work together, such as buttons, inkwells and snackbars
@@ -59,4 +63,19 @@ A stateless widget has no state, which means that that widget will not change as
 
 * **Icon**
 
-  
+  A graphical widget that can't be interacted with, and normally represents simple symbols/glyphs. This widget allows us to use the predefined library of icons provided by flutter's material package
+
+* **Padding**
+
+  A widget that allows us to contain a single child, as well as allows us to set the EdgeInsets, which is the amount of space between the edges of the parent class and the edges of the child class, allowing for some control on layout
+
+* **Text**
+
+  A static widget that can display text, with formatting and styling defined within the class constructor
+
+* **MyHomePage**
+
+  A Stateless widget that is defined by me that represents the Homepage (currently the only page) and builds the widgets within the page accordingh to the build method we have defined (overriding the original build method)
+
+
+* **AppBar**
