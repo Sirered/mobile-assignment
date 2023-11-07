@@ -39,7 +39,7 @@ A stateless widget has no state, which means that that widget will not change as
 
 * **Scaffold**
 
-  A widget that allows us to utilise widgets that pop in or float the rest of the application like (for our purpose) snack bars, as well as also floating buttons, drawers, while following Material Design and allows consistent design under such guidelines
+  A widget that allows us to utilise widgets that pop in or float the rest of the application like (for our purpose) snack bars, as well as also floating buttons, drawers, while following Material Design and allows consistent design under such guidelines. This is done, by setting the widgets mentioned prior at fixed heights/positions on the screen
 
 * **ScaffoldMessenger**
 
@@ -79,3 +79,21 @@ A stateless widget has no state, which means that that widget will not change as
 
 
 * **AppBar**
+
+  A widget that is part of Scaffold that is fixed at the top of the screen, normally containing other widgets such as general info regarding the entire app, buttons that execute functions that should be accessible from all pages of the app. For more niche or complex functions, normally it is done with a dropdown menu
+
+* **SingleChildScrollView**
+
+  A box that contains a single child that can be scrolled through. Normally used to contain children that can normally be viewed entirely, but can still bescrolled if the dimensions of the screen becomes smaller
+
+* **GridView**
+
+  A widget that contains children in which they are displayed in a grid layout. You can define the amount of children on a row, spacing between children, padding of the grid from the edge of the GridView and the edge of each children.
+
+* **MyApp**
+
+  A widget defined by me that builds the actual app when made and is called by the main function (thus when the app is run)
+
+* **MaterialApp**
+
+  An App widget that represents the entire application such as routing, home page, navigation, general theme and styling etc. The materialApp is specifically used to implement material design as it implements functions and revolves around widgets necessary for material design
