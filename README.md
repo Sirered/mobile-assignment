@@ -97,3 +97,26 @@ A stateless widget has no state, which means that that widget will not change as
 * **MaterialApp**
 
   An App widget that represents the entire application such as routing, home page, navigation, general theme and styling etc. The materialApp is specifically used to implement material design as it implements functions and revolves around widgets necessary for material design
+
+## Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+
+* **Create a new Flutter application with the inventory theme, just like previous tutorials.**
+
+  First I created an empty local directory on my laptop called inventory. I then ran the flutter create mobile-inventory function, which created a flutter project. I then initialised git in the newly made project. I then made a repository(this repository) on github, then went back to the local directory and git added, comitted and pushed with origin master. Then in the Lib folder in the project, I added a menu.dart file, in which I moved definition of the class MyHomePage from main.dart to menu.dart, adding an import function in main.dart that imports from menu.dart. Now all that main.dart has is the MyApp class which defines the app as a whole, with an instance of MyHomePage (imported from menu.dart) as the home, with the default theme provided when we created the project, as well as a main function that just creates an instance of MyApp. Afterwards in the MyHomePage class I overridden the Widget build method that makes it so that when MyHomePage widget is built it will return a Scaffold, with:
+
+  An App bar with the name of our shop (for now it is Inventory)
+
+  A body that, if it gets too small, will allow users to scroll through those contents. Said contents are center aloigned text stating that this is the PBP Shop, as well as a GridView of shop cards, explained in the later points. It also has a bunch of spacing and aligning with the help of widgets such as Padding and Column, as well as attributes within widgets, like the textAlign attribute in the Text widget
+
+We also made it so that the MyHomePage is Stateless, by changing what it is extending and removing anything to do with state in the class
+
+* **Create 3 simple buttons with icon and text**
+
+  First we defined a class called ShopItem class in which they have 3 attributes, a String name, an IconData called icon (which allows us to use the library of icons provided by flutter, as icons in our app) and a color that is of the Color class. The only method it has is it's constructor, which takes all 3 attributes as parameters. This class represents raw components that we will find in our shop app for now. Then we define a stateless widget called ShopCard which only has an object of the ShopItem 
+ class, called item, and key as attributes. It also overrides the Widget build method, so that when it is built, it returns a Material widget that is of the color specified in the item object assigned to this specific ShopCard and has a child that is of the Inkwell class that acts like a button. This Inkwell object also has a child, of the Column class, which contains the icon and text specified in the item attribute of the ShopCard. This column and text is centeraligned to look nice and the icons, as well as the text is white.
+
+  After we have defined the ShopCard class and how it's built, we can add a list of ShopItems, called items in the MyHomePage class, in which we will define the buttons specified by the checklist, so one of the members of the list would be ShopItem("View Items", Icons.checklist, Colors.indigo) where "View Items" is the name of the item, Icons.checklist is a checklist icon from the flutter icon library and Colors.indigo represents the color indigo, thus this is supposed to represent a button with the label "View Items", of the color indigo and with a checklist icon on it. The other buttons are defined in a similar manner, as members of this items list. Then in the GridView, which is a child of the column that is the child of the SingleChildScrollView, that is the body of the Scaffold that is returned when MyHomePage is built add a children attribute that maps the items as ShopItems and return them as ShopCards, thus building them as detailed in the paragraph prior (when we were defining the ShopCards class) and putting those ShopCards in a grid-like view
+
+* **Create a Snackbar with the following texts**
+
+  In the Inkwell, that is a child of the Material that is returned when building a ShopCard, add an onTap attribute that is a method with no parameters that wil call a ScaffoldMessenger to hide the current snackbar and show a snackbar with the text "You pressed the ${item.name} button" where item.name is the name of the ShopItem associated with the ShopCard being built, thus now whenever the inkwell that is currently acting as a button is tapped, it will sow a snackbar that informs the user of the button they have just pressed, just as described in the checklist
