@@ -120,3 +120,50 @@ We also made it so that the MyHomePage is Stateless, by changing what it is exte
 * **Create a Snackbar with the following texts**
 
   In the Inkwell, that is a child of the Material that is returned when building a ShopCard, add an onTap attribute that is a method with no parameters that wil call a ScaffoldMessenger to hide the current snackbar and show a snackbar with the text "You pressed the ${item.name} button" where item.name is the name of the ShopItem associated with the ShopCard being built, thus now whenever the inkwell that is currently acting as a button is tapped, it will sow a snackbar that informs the user of the button they have just pressed, just as described in the checklist
+
+# Assignment 8
+
+## Explain the difference between Navigator.push() and Navigator.pushReplacement(), accompanied by examples of the correct usage of both methods!
+First, we need to discuss how the Navigator works. Basically we have a stack of pages, and whichever page is at the top of the stack is the one that the user is currently viewing. When we do Navigator.push() we push the webpage to the top of the stack, thus causing us to view the pushed page. When we use pushReplacement, the top of the stack is first popped then the webpage assigned within the function is pushed on. This means that both functions will bring us to the page that has been assigned within the function, however they differ in the fact that if we pop th stack, which occurs when we go back on a web page, if we had used push to get to that page, we would go back to the page that had pushed the web page, however if we used push replacement, since the stack was popped first, when we go back, we would instead be redirected to the last page that we used Navigator.push() when it was going to the next webpage, basically skipping over webpages that have been deemed as awkward to go back to once business on tht page is finished.
+
+For example, if we had a manga reading website and each chapter got it's own web page, it would be appropriate to use Navigator.push(), because users would want to and should be able to see the chapters that they have viewed previously by going back, whereas if a user has filled out a form or a login, it might be best to use Navigator.pushReplacement, because there could be rather unfortunate or awkward occurences from going back to the form after you have completed it (for example, they might make another submission, thinking that going back had undone the submission as well), hence it best to avoid going back to form pages, especially logins or registering accounts
+
+## Explain each layout widget in Flutter and their respective usage contexts!
+
+* **Align**
+
+  A widget with a single child, that can be placed within the alignment widget by either using the coordinate system with offset, or using the predetermined alignements such us Alignment.bottomCenter
+
+* **ListView**
+
+  A widget that contains children in which they are displayed in a list layout. This widget allows you to scroll throught the list of children you have and define the extent of all of it's children to keep consistency. The list of children will be shown one after another, according to how they are ordered in the list, in the direction that the list is scrolling in (up to down by default)
+
+* **Row**
+
+  A widget that allows you to contain children in an array in which each child is to the right of the one before it. 
+
+* **Center**
+
+  A widget that places it's child in the middle of the widget, allowing us to easily align our inner widgets to the middle.
+
+* **Container**
+
+  As the name suggests it is a widget that can contain other widgets, allowing for more control on positioning and useof space by setting attributes such as padding, margin Alignment etc.
+
+* **Padding**
+
+  A widget that allows us to contain a single child, as well as allows us to set the EdgeInsets, which is the amount of space between the edges of the parent class and the edges of the child class, allowing for some control on layout
+
+* **Column**
+
+  A widget that allows you to contain children in an array in which each child is below the one before it,expanding the Column widget vertically as you add more items, allowing you to fit every child snugly
+
+* **GridView**
+
+  A widget that contains children in which they are displayed in a grid layout. You can define the amount of children on a row, spacing between children, padding of the grid from the edge of the GridView and the edge of each children.
+
+## List the form input elements you used in this assignment and explain why you used these input elements!
+
+## How is clean architecture implemented in a Flutter application?
+
+## Explain how you implemented the checklist above step-by-step! (not just following the tutorial)
