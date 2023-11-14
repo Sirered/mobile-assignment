@@ -132,23 +132,23 @@ For example, if we had a manga reading website and each chapter got it's own web
 
 * **Align**
 
-  A widget with a single child, that can be placed within the alignment widget by either using the coordinate system with offset, or using the predetermined alignements such us Alignment.bottomCenter
+  A widget with a single child, that can be placed within the alignment widget by either using the coordinate system with offset, or using the predetermined alignements such us Alignment.bottomCenter. It can be used to fit logos or put buttons in an appropriate section of the page
 
 * **ListView**
 
-  A widget that contains children in which they are displayed in a list layout. This widget allows you to scroll throught the list of children you have and define the extent of all of it's children to keep consistency. The list of children will be shown one after another, according to how they are ordered in the list, in the direction that the list is scrolling in (up to down by default)
+  A widget that contains children in which they are displayed in a list layout. This widget allows you to scroll throught the list of children you have and define the extent of all of it's children to keep consistency. The list of children will be shown one after another, according to how they are ordered in the list, in the direction that the list is scrolling in (up to down by default). It can be used to go through a long navigation drawer, or scroll through button options.
 
 * **Row**
 
-  A widget that allows you to contain children in an array in which each child is to the right of the one before it. 
+  A widget that allows you to contain children in an array in which each child is to the right of the one before it. Good for grouping a moderate amount of similar buttons or widgets
 
 * **Center**
 
-  A widget that places it's child in the middle of the widget, allowing us to easily align our inner widgets to the middle.
+  A widget that places it's child in the middle of the widget, allowing us to easily align our inner widgets to the middle. Good if you want an image or icon in the middle of a widget, or there is a sizable blank space with a button in it.
 
 * **Container**
 
-  As the name suggests it is a widget that can contain other widgets, allowing for more control on positioning and useof space by setting attributes such as padding, margin Alignment etc.
+  As the name suggests it is a widget that can contain other widgets, allowing for more control on positioning and use of space by setting attributes such as padding, margin Alignment etc. You may use it as a child of a larger widget to contain multiple smaller children, like a button that wants to have both icon and text.
 
 * **Padding**
 
@@ -160,10 +160,31 @@ For example, if we had a manga reading website and each chapter got it's own web
 
 * **GridView**
 
-  A widget that contains children in which they are displayed in a grid layout. You can define the amount of children on a row, spacing between children, padding of the grid from the edge of the GridView and the edge of each children.
+  A widget that contains children in which they are displayed in a grid layout. You can define the amount of children on a row, spacing between children, padding of the grid from the edge of the GridView and the edge of each children.n
 
 ## List the form input elements you used in this assignment and explain why you used these input elements!
 
+### Widgets used
+* **Form**
+
+  The form widget groups multiple form fields, allowing us to track the state of the form, validate all form fields when clicking the save button and reset every form field when an item is successfully saved
+
+* **TextFormField**
+
+  A widget that allows users to input data into the form field, and the value of the data inputted will be treated as string
+
+### Elements of the item
+
+We were told to ad elements according to our Django model. The items in the Django model are supposed to represent Digimon cards. These are the elements:
+  1. `name`: the name of the item/card. 
+  2. `category`: category of the item/card (e.g. Lv.7 Digimon)
+  3. `code`: the code of the Digimon card, which is normally used to differentiate each type of card
+  4. `amount`: the amount of the item/card in stock/inventory/collection
+  5. `price`: the price of the item/card
+  6. `description`: describes the item/card. Typically the card text of the card
+
 ## How is clean architecture implemented in a Flutter application?
+
+Clean architecture refers to the separation of concerns by dividing them into layers
 
 ## Explain how you implemented the checklist above step-by-step! (not just following the tutorial)
