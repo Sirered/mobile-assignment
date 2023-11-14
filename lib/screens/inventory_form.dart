@@ -22,7 +22,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Add Product Form',
+            'Add Item Form',
           ),
         ),
         backgroundColor: Colors.indigo,
@@ -194,7 +194,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Product successfully saved'),
+                              title: const Text('Item successfully saved'),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

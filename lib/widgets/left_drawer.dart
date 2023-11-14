@@ -17,7 +17,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Shopping List',
+                  'Inventory',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -27,7 +27,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                  "Write all your shopping needs here!",
+                  "Write all your inventory needs here!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
@@ -40,7 +40,7 @@ class LeftDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.home_outlined),
-            title: const Text('Homa Page'),
+            title: const Text('Home'),
             // redirect to MyHomePage
             onTap: () {
               Navigator.pushReplacement(
@@ -53,7 +53,7 @@ class LeftDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.add_shopping_cart),
-            title: const Text('Add Product'),
+            title: const Text('Add Item'),
             // redirect to ShopFormPage
             onTap: () {
               Navigator.pushReplacement(
