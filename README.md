@@ -185,7 +185,13 @@ We were told to ad elements according to our Django model. The items in the Djan
 
 ## How is clean architecture implemented in a Flutter application?
 
-Clean architecture refers to the separation of concerns by dividing them into layers
+Clean architecture refers to the separation of concerns by dividing them into layers, namely, Data, Domain and Features. The Data section takes data whether it be from a database or API using abstract classes and handles the processing from json data to data that can be used on flutter. As this is a point that hasn't been touched on before during tutorial nor in class, I'm not 100% sure about the Data layer. 
+
+In the Domain layer, we transform the data we have taken from the Data layer and transform it into entities, similar to the ShopItem class found in shop_card.dart. Once it is an entity, we can treat the data as entities, allowing us to have methods in the entities, which may be helpful to further process the data, or to handle cases where we want the attributes of the entity to change. 
+
+Lastly the Feature layer, we take the entities that were transformed in the Domain layer, and use it to build our actual widgets, like how we use the ShopItem entity to build our ShopCards. 
+
+This ability to separate our application into these layers, allow for easier maintainability and readability of code, made easier if you separate each widget and acreen into it's own dart file, which allows us to navigate through the prohject files a lot easier and giving us a less clustered view of our code.
 
 ## Explain how you implemented the checklist above step-by-step! (not just following the tutorial)
 
