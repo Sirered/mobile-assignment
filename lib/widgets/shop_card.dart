@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_inventory/screens/inventory_form.dart';
+import 'package:mobile_inventory/screens/view_screen.dart';
 
 class ShopItem {
   final String name;
@@ -31,6 +32,12 @@ class ShopCard extends StatelessWidget {
             Navigator.push(
               context, 
               MaterialPageRoute(builder:(context) => const ShopFormPage())
+            );
+          }
+          if (item.name == "View Items") {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder:(context) => const ViewPage())
             );
           }
         },

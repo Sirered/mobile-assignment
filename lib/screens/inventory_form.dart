@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_inventory/widgets/left_drawer.dart';
+import 'package:mobile_inventory/widgets/view_item.dart';
 
 class ShopFormPage extends StatefulWidget {
     const ShopFormPage({super.key});
@@ -190,6 +191,16 @@ class _ShopFormPageState extends State<ShopFormPage> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        CardItem.items.add(
+                          CardItem(
+                            name: _name,
+                            code: _code, 
+                            category: _category, 
+                            amount: _amount, 
+                            price: _price, 
+                            description: _description
+                            )
+                        );
                         showDialog(
                           context: context,
                           builder: (context) {
