@@ -195,7 +195,7 @@ This ability to separate our application into these layers, allow for easier mai
 
 ## Explain how you implemented the checklist above step-by-step! (not just following the tutorial)
 
-* **Create at least one new page in the application, a page for adding a new item**
+**Create at least one new page in the application, a page for adding a new item**
 
   Firstly, I made a dart file named inventory_form in which this new page will be defined. Like all of the other flutter files we have made thus far, it imports from the flutter/materials.dart package. After making the file, I define a Stateful widget named ShopFormPage with a constructor that only has super.key (which is the key taken from it's parent class) and has a private instance of ShopFormPageState as it's state
 
@@ -208,15 +208,15 @@ This ability to separate our application into these layers, allow for easier mai
 * When this button is pressed it will validate the current contents of the TextFormFields, and if they are valid, an Alert Dialog is pushed to the front of the screen that displays the name of each attribute, along with the values that have supposedly been saved
 * This AlertDialog also has an 'OK' Button that pops the AlertDialog when pressed
 
-* **Direct users to the new item addition form page when clicking the Add Item button on the main page.**
+**Direct users to the new item addition form page when clicking the Add Item button on the main page.**
 
   In the ShopCard widget, in the onTap function of the Inkwell, we add an if statement where if it's associated ShopItem's name is Add Item, it will redirect the user to the newly created page, using Navigator.push() (to do this we also have to import inventory_form.dart to the file that the definition of ShopCard is located in
 
-* **Display data as entered in the form in a pop-up after clicking the Save button on the new item addition page.**
+**Display data as entered in the form in a pop-up after clicking the Save button on the new item addition page.**
 
 Explained in the 3rd from last bullet point onwards from the Create at least one new page... section
 
-* **Create a drawer in the application**
+**Create a drawer in the application**
 
   Firstly, I created a new dart file named left_drawer, that imports flutter/materials, as well as the files that contain the HomePage and the ShopFormPage. I then defined a Stateless Widget named LeftDrawer within this file. The constructor of this widget only contains super.key and it doesn't have any attributes for itself. It's Widget Build method id overridden so that when it's built it returns a Drawer, with a ListView as it's child, which contains:
 * An indigo drawer header, that contains a Column that has large white text saying 'Inventory', as well as some smaller white text that says 'Write all your inventory needs here!'
