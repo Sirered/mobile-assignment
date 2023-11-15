@@ -136,11 +136,11 @@ For example, if we had a manga reading website and each chapter got it's own web
 
 * **ListView**
 
-  A widget that contains children in which they are displayed in a list layout. This widget allows you to scroll throught the list of children you have and define the extent of all of it's children to keep consistency. The list of children will be shown one after another, according to how they are ordered in the list, in the direction that the list is scrolling in (up to down by default). It can be used to go through a long navigation drawer, or scroll through button options.
+  A widget that contains children in which they are displayed in a list layout. This widget allows you to scroll throught the list of children you have and define the extent of all of it's children to keep consistency. The list of children will be shown one after another, according to how they are ordered in the list, in the direction that the list is scrolling in (up to down by default). It can be used to go through a long navigation drawer, or scroll through button options or contents of stateful widgets (like a card that will contain information from database, that may be too large to fit in the widget)
 
 * **Row**
 
-  A widget that allows you to contain children in an array in which each child is to the right of the one before it. Good for grouping a moderate amount of similar buttons or widgets
+  A widget that allows you to contain children in an array in which each child is to the right of the one before it. Good for grouping a moderate amount of similar buttons or widgets.
 
 * **Center**
 
@@ -152,15 +152,15 @@ For example, if we had a manga reading website and each chapter got it's own web
 
 * **Padding**
 
-  A widget that allows us to contain a single child, as well as allows us to set the EdgeInsets, which is the amount of space between the edges of the parent class and the edges of the child class, allowing for some control on layout
+  A widget that allows us to contain a single child, as well as allows us to set the EdgeInsets, which is the amount of space between the edges of the parent class and the edges of the child class, allowing for some control on layout. Used anywhere you want padding in, which is most widgets, such as in cards, contents of cards, contents of drawers, buttons that are close together, contents of buttons etc.
 
 * **Column**
 
-  A widget that allows you to contain children in an array in which each child is below the one before it,expanding the Column widget vertically as you add more items, allowing you to fit every child snugly
+  A widget that allows you to contain children in an array in which each child is below the one before it,expanding the Column widget vertically. Best for laying out stateless widgets, such as laying out a drawer or large button or list of buttons or text.
 
 * **GridView**
 
-  A widget that contains children in which they are displayed in a grid layout. You can define the amount of children on a row, spacing between children, padding of the grid from the edge of the GridView and the edge of each children.n
+  A widget that contains children in which they are displayed in a grid layout. You can define the amount of children on a row, spacing between children, padding of the grid from the edge of the GridView and the edge of each children. Best to layout a collection of cards or images/icons or square buttons.
 
 ## List the form input elements you used in this assignment and explain why you used these input elements!
 
