@@ -78,7 +78,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 // TODO: Change the URL and don't forget to add a trailing slash (/) at the end of the URL!
                 // To connect the Android emulator to Django on localhost,
                 // use the URL http://10.0.2.2/
-                final response = await request.postJson("http://galih-ibrahim-tugas.pbp.cs.ui.ac.id/auth/register/", 
+                final response = await request.postJson("http://127.0.0.1:8000/auth/register/", 
                   jsonEncode(<String, String>{
                     'username': username,
                     'password1': password1,

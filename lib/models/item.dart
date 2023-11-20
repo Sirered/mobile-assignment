@@ -3,6 +3,7 @@
 //     final item = itemFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:flutter/material.dart';
 
 List<Item> itemFromJson(String str) => List<Item>.from(json.decode(str).map((x) => Item.fromJson(x)));
 
@@ -42,6 +43,8 @@ class Fields {
     String description;
     DateTime dateAdded;
     String color;
+    Color cardColor = Colors.white;
+    Color textColor = Colors.black;
 
     Fields({
         required this.user,
@@ -53,7 +56,15 @@ class Fields {
         required this.description,
         required this.dateAdded,
         required this.color,
-    });
+    }) {
+      if (color == "Black") {cardColor = Colors.grey;
+      } else if (color == "Blue") {cardColor = Colors.lightBlueAccent;
+      } else if (color == "Red") {cardColor = Colors.pink; textColor = Colors.white;
+      } else if (color == "Purple") {cardColor = Colors.purple; textColor = Colors.white;
+      } else if (color == "Yellow") {cardColor = Colors.yellow;
+      } else if (color == "Green") {cardColor = Colors.lightGreen;
+      } else {cardColor = Colors.white;}
+    }
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         user: json["user"],

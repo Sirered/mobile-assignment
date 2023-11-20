@@ -5,7 +5,7 @@ import 'package:mobile_inventory/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-const List<String> colorchoices = <String>['Blue', 'Red', 'Green', 'Yellow', 'Purple', 'Bkack', 'White'];
+const List<String> colorchoices = <String>['Blue', 'Red', 'Green', 'Yellow', 'Purple', 'Black', 'White'];
 class ShopFormPage extends StatefulWidget {
     const ShopFormPage({super.key});
 
@@ -216,7 +216,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                         // Send request to Django and wait for the response
                         // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
                         final response = await request.postJson(
-                          "http://galih-ibrahim-tugas.pbp.cs.ui.ac.id/create-flutter/",
+                          "http://127.0.0.1:8000/create-flutter/",
                           jsonEncode(<String, String>{
                             'name': _name,
                             'price': _price.toString(),

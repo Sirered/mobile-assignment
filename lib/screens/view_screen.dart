@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:mobile_inventory/models/item.dart';
+import 'package:mobile_inventory/screens/detail_item.dart';
 import 'package:mobile_inventory/widgets/left_drawer.dart';
 
 class ItemPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchItem() async {
     // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
     var url = Uri.parse(
-      'http://galih-ibrahim-tugas.pbp.cs.ui.ac.id/json/');
+      'http://127.0.0.1:8000/json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -57,37 +58,70 @@ class _ItemPageState extends State<ItemPage> {
                 ],
               );
             } else {
-              return ListView.builder(
+              return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4, 
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                ),
                 itemCount: snapshot.data!.length,
-                itemBuilder: (_, index) => Container(
+                itemBuilder: (_, index) => Card(
+                  color: snapshot.data![index].fields.cardColor,
                   margin: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 12),
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${snapshot.data![index].fields.name}",
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.code}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.category}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.price}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.amount}"),
-                      const SizedBox(height: 10),
-                      Text(
-                        "${snapshot.data![index].fields.description}"
-                      )
-                    ],
+                    horizontal: 16, vertical: 12
                   ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                          DetailPage(item: snapshot.data![index]),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ListView(
+                        children: [
+                          Text(
+                            "${snapshot.data![index].fields.name}",
+                            style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                              color: snapshot.data![index].fields.textColor,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            "Amount: ${snapshot.data![index].fields.amount}",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: snapshot.data![index].fields.textColor,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            "Description:",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: snapshot.data![index].fields.textColor,
+                            ),
+                          ),
+                          Text(
+                            "${snapshot.data![index].fields.description}",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                              color: snapshot.data![index].fields.textColor,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  )
                 )
               );
             }
