@@ -35,7 +35,7 @@ class ItemCard extends StatelessWidget {
       child: Card(
         color: Colors.lightBlueAccent,
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: [
               Text(

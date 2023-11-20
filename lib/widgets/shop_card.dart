@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_inventory/screens/inventory_form.dart';
+import 'package:mobile_inventory/screens/login.dart';
 import 'package:mobile_inventory/screens/view_screen.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ShopItem {
   final String name;
@@ -17,11 +20,12 @@ class ShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: item.color,
       child: InkWell(
         // Responsive touch area
-        onTap: () {
+        onTap: () async {
           // Show a SnackBar when clicked
           ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
@@ -34,11 +38,29 @@ class ShopCard extends StatelessWidget {
               MaterialPageRoute(builder:(context) => const ShopFormPage())
             );
           }
-          if (item.name == "View Items") {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder:(context) => const ViewPage())
-            );
+          else if (item.name == "View Items") {
+            Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ItemPage()));
+          }
+          else if (item.name == "Logout") {
+            final response = await request.logout(
+            // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
+            "http://galih-ibrahim-tugas.pbp.cs.ui.ac.id/auth/logout/");
+            String message = response["message"];
+            if (response['status']) {
+              String uname = response["username"];
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message Good bye, $uname."),
+              ));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(message),
+              ));
+            }
           }
         },
         child: Container(

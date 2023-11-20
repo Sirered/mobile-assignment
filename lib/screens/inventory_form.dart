@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:mobile_inventory/screens/menu.dart';
 import 'package:mobile_inventory/widgets/left_drawer.dart';
-import 'package:mobile_inventory/widgets/view_item.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
+const List<String> colorchoices = <String>['Blue', 'Red', 'Green', 'Yellow', 'Purple', 'Bkack', 'White'];
 class ShopFormPage extends StatefulWidget {
     const ShopFormPage({super.key});
 
@@ -17,8 +21,11 @@ class _ShopFormPageState extends State<ShopFormPage> {
   int _amount = 0;
   int _price = 0;
   String _description = "";
+  String _color = colorchoices.first;
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -180,6 +187,21 @@ class _ShopFormPageState extends State<ShopFormPage> {
                   },
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownMenu<String>(
+                  initialSelection: colorchoices.first,
+                  onSelected: (String? value) {
+                    // This is called when the user selects an item.
+                    setState(() {
+                      _color = value!;
+                    });
+                  },
+                  dropdownMenuEntries: colorchoices.map<DropdownMenuEntry<String>>((String value) {
+                    return DropdownMenuEntry<String>(value: value, label: value);
+                  }).toList(),
+                )
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
@@ -189,48 +211,38 @@ class _ShopFormPageState extends State<ShopFormPage> {
                       backgroundColor:
                       MaterialStateProperty.all(Colors.indigo),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        CardItem.items.add(
-                          CardItem(
-                            name: _name,
-                            code: _code, 
-                            category: _category, 
-                            amount: _amount, 
-                            price: _price, 
-                            description: _description
-                            )
+                        // Send request to Django and wait for the response
+                        // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
+                        final response = await request.postJson(
+                          "http://galih-ibrahim-tugas.pbp.cs.ui.ac.id/create-flutter/",
+                          jsonEncode(<String, String>{
+                            'name': _name,
+                            'price': _price.toString(),
+                            'description': _description,
+                            'category':_category,
+                            'code':_code,
+                            'amount':_amount.toString(),
+                            'color':_color
+                            // TODO: Adjust the fields with your Django model
+                          })
                         );
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Item successfully saved'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Name: $_name'),
-                                    Text('Category: $_category'),
-                                    Text('Code: $_code'),
-                                    Text('Amount: $_amount'),
-                                    Text('Price: $_price'),
-                                    Text('Description: $_description'),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                        _formKey.currentState!.reset();
+                        if (response['status'] == 'success') {
+                          ScaffoldMessenger.of(context)
+                          .showSnackBar(const SnackBar(
+                            content: Text("New item has saved successfully!"),
+                          ));
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => MyHomePage()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context)
+                          .showSnackBar(const SnackBar(
+                            content:Text("Something went wrong, please try again."),
+                          ));
+                        }
                       }
                     },
                     child: const Text(
