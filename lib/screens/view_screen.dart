@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:mobile_inventory/models/item.dart';
 import 'package:mobile_inventory/screens/detail_item.dart';
 import 'package:mobile_inventory/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ItemPage extends StatefulWidget {
     const ItemPage({Key? key}) : super(key: key);
@@ -15,18 +15,15 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchItem() async {
     // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
-    var url = Uri.parse(
-      'http://127.0.0.1:8000/json/');
-    var response = await http.get(
-      url,
-      headers: {"Content-Type": "application/json"},
+    final request = context.watch<CookieRequest>();
+    var response = await request.get(
+      'http://127.0.0.1:8000/json/'
     );
     // decode the response to JSON
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // convert the JSON to Item object
     List<Item> listItem = [];
-    for (var d in data) {
+    for (var d in response) {
         if (d != null) {
           listItem.add(Item.fromJson(d));
         }
