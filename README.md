@@ -223,4 +223,76 @@ Explained in the 3rd from last bullet point onwards from the Create at least one
 * A list Tile, that leads with an outlined home icon, the Text 'Home' and an onTap function that uses Navigation.pushReplacement() to redirect the user to th HomePage
 * A list Tile, that leads with a shopping cart icon, the Text 'Add Item' and an onTap function that uses Navigation.pushReplacement() to redirect the user to ShopFormPage
 
-   Afterwards, I imported left_drawer.dart to the files that contains the 2 pages we have made and added `drawer: const LeftDrawer(),` to the Scaffold returned when building the HomePage, as well as the Scaffold built by the ShopFormPage, so that both pages will be able to use that drawer. 
+   Afterwards, I imported left_drawer.dart to the files that contains the 2 pages we have made and added `drawer: const LeftDrawer(),` to the Scaffold returned when building the HomePage, as well as the Scaffold built by the ShopFormPage, so that both pages will be able to use that drawer.
+
+## Can we retrieve JSON data without creating a model first? If yes, is it better than creating a model before retrieving JSON data?
+
+  Yes we can, in fact that is what happens when we login and register, despite there not being a model for user and stuff like that, we can still take the json response from the login and register function, decode it and take the information that we need from there, to figureout if our request was a success and what message we should display to the user. Retrieving json without a model isn't worse or better, it just depends on what that json data is being used for. If it's just to send basic data that may be temporary and there isn't a large amount of uniform data within the response, then for the sake of flexibility and simplicity, it might be best to do it without a model, because if you just need it briefly or there isn't a set structure that needs to be followed among the data, the hassle of creating a model for it is not worth it, and can even be a hindrance if there are changes in what is returned in the response (since you would have to update the model accordingly. 
+  
+  However, if you are working with a large list of data and each object within that list is uniform (has similar attributes) or if there are multiple instances of Json Responses that should have similar data, then it might be in your interest to create models for more controllable/customisable serialisation and deserialisation, as well as allowing flutter and any flutter intellisense that you may be using to catch issues that may be caused due to mistyping or due to forgetting the types of the data and what you can and can't do to them, such as using the wrong name for an attribute or using an int attribute without casting for a Text widget. It also allows your flutter code to be more readable, since readers can refer to the model when items of that model are being used, and makes the serialisation and assigning logic separate from the view/frontend logic.
+
+## Explain the mechanism of fetching data from JSON until it can be displayed on Flutter.
+
+   To fetch data we must create an asynchronous function. In that function we use packages such as http or in our case the pbp package to send an http request onto the web (with the await tag, so flutter will wait for the data to be returned first), which will be directed using a url to the relevant server. That request will be processed (if the url is correct) and an http response, with data that has been serialised to JSON will be returned from the server and back to the device that is using the app. From there, we deserialise the JSON data. If we have a model, we will use that to map/convert the data to an instance or instances of that model for further use. If we don't, we have to assign it to a variable specify in {} what data from the converted JSON is taken, and the name of the attribute that that info is assigned to (e.g. 'username': username). Then using that variable or list of data we can assign the data that was taken from the fetched JSON to help in the construction of the widgets (for example if we hd used a model and stored the data as the variable item, and that item has an attribute called name (that was taken from the Json) we can use item.name as the string data of a text widget, thus displaying that data onto flutter).
+
+## Explain the authentication mechanism from entering account data on Flutter to Django authentication completion and the display of menus on Flutter.
+
+  I implemented authentication using the PBP package, so I shall explain authentication using the PBP package. Firstly a request variable that watches CookieRequest is made on building of the Login Page. Then there are textfields where the user can input their username and password. When they have filled it out, they will click a login button which when pressed will call an asynchronous function that takes the calues from the textfields and save them to variables. It then requests data from the server using the request.get method provided by the PBP package, that will send an http request to the chosen link, with the username and password data being stored in the request that is being sent. The server using Django will read the username and password found within the request and use Django's authenticate method to authenticate the user. If the user does indeed exist and that is indeed their password, the authenticate function will return that given user, in which the Django server checks if they are active, and if yes, the user is successfully loggedin on on the server and a response encoded in JSON with the information regarding the successful login is returned as an http response to the device that tried to log in. Once the device running the app recieves the response it will set the cookie with the info that the user is now loggedin and the name of the user, use the data that was returned by the Django login function to display any messages and navigate them to the actual Home page of the app. If the user failed authentication on the Django side, a response that details the failure of the login is returned, and similar to when it succeeds, the app awaits for the response, checks if it was a success and will use the info that was sent back in the response to formulate a message for the user, but this time the user isn't navigated to the Home Page
+
+##  List all the widgets you used in this assignment and explain their respective functions.
+
+  * **Provider**
+
+    This widget is provided by the provider package that is useful for keeping track of the current state. It allows us to store data that can be accessed by all child widgets, in this case it was used to pass the request variable to the child widgets, without it being explicitly passed down,
+
+* **CookieRequest**
+
+  A custom class provided by the PBP package that allows us to store certain cookies and use those cookies to facilitate request.posting and request.getting from our Django individual assignment project.
+
+* **LoginPage**
+
+  A stateful widget that represents/builds the login page of the project. It has the private state _LoginPageState that has the WidgetBuild function and keeps track of the content of the textboxes, which are used to send an authentication request to our Django assignment project
+
+* **TextField**
+
+  A field that allows the user to enter text. This is used in the login page, and the text attribute is equal to the input that the user has typed
+
+* **InputDecoration**
+
+  A widget that allows you to decorate input fields with hint text, as well as allows us to stylise the input field
+
+* **SizedBox**
+
+  A box in which you can define the height and width of the box, and the child of that box must conform to the dimensions that have been assigned. In this assignment this widget is used for vertical spacing
+
+* **ElevatedButton**
+
+  A button that is slightly raised compared to most other widgets, which makes it pup out more.
+
+* **ItemPage**
+
+  A stateful widget that represents/builds the item view page of the project. It has the private state _ItemPageState that has the WidgetBuild function and builds cards according to the data that it has fetched from the Django project
+
+* **FutureBuilder**
+
+  A widget that allows us to work with asynchronous functions (in this case fetching data) by setting that function as a future and getting snapshots of the last interaction of that function, and uses those snapshots to build/rebuild the webpage accordingly. In this case those snapshots contain all of the items that have been taken from the response to the fetch request to the django project
+
+
+* **Gridview.builder**
+
+  I've already explained GridView, but before tht was using GridView.count, which has a fixed number of children, whereas GridView.builder can have a dynamic (changing) amount of children, though it does require a gridDelegate to help set the grid
+
+* **SliverGridDelegateWithFixedCrossAxisCount**
+
+  A delegator that helps in delegating the space used up by each child of the GridView.builder. It has a fixed cross axis, which means that you can define the amount of children per row
+
+* **TextStyle**
+
+  Allows us to sylize our text (I forgot to include this in previous weeks)
+
+* **DetailPage**
+
+  A stateless widget that is built when someone taps on one of the cards from the ItemPage. It is built using an item of the Item class, that was passed when the card was clicked, showing all of the attributes that an instance of item from my Django project has (other than user)
+
+All other widgets that were used for this week's assignment have already been explained in a previous assignment
+
