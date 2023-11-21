@@ -225,6 +225,8 @@ Explained in the 3rd from last bullet point onwards from the Create at least one
 
    Afterwards, I imported left_drawer.dart to the files that contains the 2 pages we have made and added `drawer: const LeftDrawer(),` to the Scaffold returned when building the HomePage, as well as the Scaffold built by the ShopFormPage, so that both pages will be able to use that drawer.
 
+# Assgnment 9
+
 ## Can we retrieve JSON data without creating a model first? If yes, is it better than creating a model before retrieving JSON data?
 
   Yes we can, in fact that is what happens when we login and register, despite there not being a model for user and stuff like that, we can still take the json response from the login and register function, decode it and take the information that we need from there, to figureout if our request was a success and what message we should display to the user. Retrieving json without a model isn't worse or better, it just depends on what that json data is being used for. If it's just to send basic data that may be temporary and there isn't a large amount of uniform data within the response, then for the sake of flexibility and simplicity, it might be best to do it without a model, because if you just need it briefly or there isn't a set structure that needs to be followed among the data, the hassle of creating a model for it is not worth it, and can even be a hindrance if there are changes in what is returned in the response (since you would have to update the model accordingly. 
